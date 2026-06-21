@@ -1,0 +1,111 @@
+@import "tailwindcss";
+
+
+@custom-variant dark (&:where(.dark, .dark *));
+
+@theme {
+  --color-primary: #FFFFFF;
+  --color-primary-dark: #262626;
+  --color-secondary: #F5F5F5;
+  --color-secondary-dark: #3B3B3B;
+  --color-inner-dark: #2F2F2F;
+  --color-inner: #F9F9FA;
+  --color-new: #BBDEFB;
+  --color-test: #263238;
+  
+  /* Figma Design Colors */
+  --color-purple: #8B5CF6;
+  --color-purple-dark: #7C3AED;
+  --color-green: #10B981;
+  --color-green-dark: #059669;
+  --color-yellow: #FBBF24;
+  --color-yellow-dark: #F59E0B;
+  --color-dark-grey: #1F2937;
+  --color-light-grey: #9CA3AF;
+  --color-text-dark: #111827;
+  --color-text-light: #6B7280;
+}
+
+
+ /* :root { */
+  /* --vh: 100vh;
+  font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
+  line-height: 1.5;
+  font-weight: 400;
+
+  color-scheme: white; */
+  /* color: rgba(255, 255, 255, 0.87); */
+  /* background-color: #ffffff; */
+
+  /* font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale; */
+ /* } */
+
+/* Fix for mobile 100vh issue */
+/* html, body, #root {
+  height: 100%;
+  min-height: 100%;
+}
+
+/* JS to update --vh on resize */
+@layer utilities {
+  .use-vh {
+    height: calc(var(--vh, 1vh) * 100);
+  }
+} 
+
+/* a {
+  font-weight: 500;
+  color: #646cff;
+  text-decoration: inherit;
+}
+a:hover {
+  color: #535bf2;
+}
+
+body {
+  margin: 0;
+  display: flex;
+  place-items: center;
+  min-width: 320px;
+  min-height: 100vh;
+}
+
+h1 {
+  font-size: 3.2em;
+  line-height: 1.1;
+}
+
+button {
+  border-radius: 8px;
+  border: 1px solid transparent;
+  padding: 0.6em 1.2em;
+  font-size: 1em;
+  font-weight: 500;
+  font-family: inherit;
+  background-color: #1a1a1a;
+  cursor: pointer;
+  transition: border-color 0.25s;
+}
+button:hover {
+  border-color: #646cff;
+}
+button:focus,
+button:focus-visible {
+  outline: 4px auto -webkit-focus-ring-color;
+}
+
+@media (prefers-color-scheme: light) {
+  :root {
+    color: #213547;
+    background-color: #ffffff;
+  }
+  a:hover {
+    color: #747bff;
+  }
+  button {
+    background-color: #f9f9f9;
+  }
+} */ 
