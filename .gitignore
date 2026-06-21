@@ -12,12 +12,7 @@ dist
 dist-ssr
 *.local
 
-# docker file ignored for now 
-docker-compose.yml
-Dockerfile
-Backend/Dockerfile
-Backend/.dockerignore
-.dockerignore
+
 
 #Secrets 
 .env
