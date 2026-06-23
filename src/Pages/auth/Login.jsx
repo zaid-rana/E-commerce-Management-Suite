@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from 'react';
 // import logo from "../assets/Icon.png";
 import loginBg from "../../assets/login-bg.png";
-import logo from "../../assets/logo.png"
 import * as Yup from "yup";
 import { Link } from 'react-router-dom';  
 import { useNavigate } from 'react-router-dom';
@@ -30,20 +29,15 @@ const Login = () => {
     let mounted = true;
     (async () => {
       try {
-        // const res = await axios.post(
-        //   `${import.meta.env.VITE_BASE_URL}/auth/status`,
-        //   {},
-        //   { withCredentials: true }
-        // );
         const res = await apiClient.post("/auth/status");
-        console.log("status checked");
+        console.log("status checked:", res?.data);
         if (!mounted) return;
-        if (res?.data?.success || res?.data?.sucess) {
-          navigate("/dashboard");
+        if (res?.data?.success) {
+          navigate("/dashboard/overview");
           return;
         }
       } catch (e) {
-        
+        console.log("Auth status check failed (expected if not logged in)");
       } finally {
         if (mounted) setCheckingAuth(false);
       }
