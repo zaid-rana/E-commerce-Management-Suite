@@ -9,6 +9,7 @@ import cors from "cors";
 import cookieParser from "cookie-parser";
 import "./config/passportConfig.js"
 
+
 // Routes
 import productRoutes from "./routes/productRoutes.js"
 import authRoutes from "./routes/authRoutes.js";
@@ -18,6 +19,8 @@ import paymentRoutes from "./routes/paymentRoutes.js";
 import { handleStripeWebhook } from "./controllers/webhookController.js";
 
 const app = express();
+const process = globalThis.process;
+const mongoURI = process.env.MONGO_URL;
 
 // --- 1. STRIPE WEBHOOK (MUST BE FIRST) ---
 app.post(
@@ -27,9 +30,18 @@ app.post(
 );
 
 // --- 2. GLOBAL MIDDLEWARE ---
+const allowedOrigins = [
+  "http://localhost:5173",        // Dev: Vite dev server
+  "http://localhost:3000",        // Alternative dev port
+  "http://localhost",             // Docker: Frontend container via Nginx
+  "http://frontend",              // Docker: Frontend container hostname
+  process.env.FRONTEND_URL,       // Environment-configured URL
+].filter(Boolean);
+
+console.log("🔐 Allowed CORS origins:", allowedOrigins);
+
 const corsOption = {
-    // Allows both localhost (dev) and your deployed Vercel app (prod)
-    origin: ["http://localhost:5173", process.env.FRONTEND_URL], 
+    origin: allowedOrigins,
     credentials: true,
     methods: ["GET", "POST", "PUT", "DELETE"],
 };
@@ -48,6 +60,9 @@ app.use(session({
     saveUninitialized: false,
     cookie: {
         maxAge: 60000 * 60,
+        httpOnly: true,
+        sameSite: "lax",
+        secure: process.env.NODE_ENV === "production", // HTTPS only in production
     },
 }));
 
@@ -65,9 +80,16 @@ app.get("/", (req,res)=>{
     res.send("Server is Running");
 })
 
-mongoose.connect(process.env.MONGO_URL).then(() => {
-    console.log("Database Connected");
-    app.listen(process.env.PORT || 5000, () =>
-        console.log(`server running on port ${process.env.PORT || 5000} `)
-    );
-})
+const PORT = process.env.PORT || 5000;
+
+mongoose.connect(mongoURI)
+  .then(() => {
+    console.log('Successfully connected to MongoDB Container');
+    app.listen(PORT, () => {
+      console.log(`server running on port ${PORT}`);
+    });
+  })
+  .catch((err) => {
+    console.error('MongoDB connection error:', err);
+    process.exit(1);
+  });

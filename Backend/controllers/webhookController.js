@@ -1,7 +1,7 @@
 import Stripe from 'stripe';
 import { Order } from '../models/Order.js'; // Import your Order Model
 
-
+const process = globalThis.process;
 
 const stripe = new Stripe(process.env.STRIPE_SECRET_KEY);
 
@@ -20,7 +20,7 @@ export const handleStripeWebhook = async (req, res) => {
 
     // Handle the event
     switch (event.type) {
-        case 'payment_intent.succeeded':
+        case 'payment_intent.succeeded': {
             const paymentIntent = event.data.object;
             console.log(`Payment captured for ID: ${paymentIntent.id}`);
 
@@ -28,8 +28,8 @@ export const handleStripeWebhook = async (req, res) => {
                 // Find the order with this Stripe Payment ID and update it
                 const order = await Order.findOneAndUpdate(
                     { paymentId: paymentIntent.id },
-                    { 
-                        isPaid: true, 
+                    {
+                        isPaid: true,
                         paidAt: Date.now(),
                         status: 'Processing' // Move from 'Pending' to 'Processing'
                     },
@@ -45,6 +45,7 @@ export const handleStripeWebhook = async (req, res) => {
                 console.error('Error updating order:', error);
             }
             break;
+        }
 
         case 'payment_intent.payment_failed':
             console.log('Payment failed');

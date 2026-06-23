@@ -6,6 +6,8 @@ import otpGenerator from "otp-generator";
 import crypto from "crypto";
 import jwt from "jsonwebtoken";
 
+const process = globalThis.process;
+
 export const signup = async (req, res) => {
   try {
     const { firstName, lastName, email, phone, password } = req.body;
@@ -112,7 +114,7 @@ export const forgotPassword = async (req, res) => {
     existingUser.resetPasswordExpire = Date.now() + 15 * 60 * 1000; // 15 minutes
     await existingUser.save();
 
-    const resetUrl = `http://localhost:5173/reset-password/${resetToken}`;
+    const resetUrl = `${process.env.FRONTEND_URL || 'http://localhost'}/reset-password/${resetToken}`;
 
     // If user exists
     // const otp = otpGenerator.generate(6, { upperCaseAlphabets: false, specialChars: false });
