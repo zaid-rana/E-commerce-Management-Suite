@@ -185,42 +185,6 @@ Before you begin, ensure you have the following installed:
 
 ---
 
-## 📚 Project Structure
-
-```
-I-Dashboard/
-├── Backend/                 # Express.js backend
-│   ├── config/             # Configuration files
-│   ├── controllers/        # Route controllers
-│   ├── models/             # MongoDB schemas
-│   ├── routes/             # API routes
-│   ├── utils/              # Utility functions
-│   ├── uploads/            # Local file storage
-│   ├── server.js           # Express app setup
-│   └── package.json        # Backend dependencies
-│
-├── src/                    # React frontend source
-│   ├── Pages/              # Page components
-│   │   ├── auth/          # Authentication pages
-│   │   ├── Dashboard/     # Admin dashboard pages
-│   │   └── Store/         # E-commerce store pages
-│   ├── components/        # Reusable React components
-│   ├── contexts/          # React context providers
-│   ├── assets/            # Images and static files
-│   ├── utils/             # Utility functions
-│   ├── App.jsx            # Main App component
-│   └── main.jsx           # React entry point
-│
-├── public/                 # Static files
-├── Dockerfile             # Frontend Docker image
-├── docker-compose.yml     # Multi-container setup
-├── nginx.conf             # Nginx configuration
-├── init-mongo.js          # MongoDB initialization script
-├── package.json           # Frontend dependencies
-└── vite.config.js         # Vite configuration
-```
-
----
 
 ## 🔐 Environment Variables
 
@@ -347,4 +311,4 @@ For questions or issues, please open an issue on GitHub or contact the maintaine
 
 ---
 
-**Made with ❤️ by [Zaid Rana](https://github.com/zaid-rana)**
+**Made by [Zaid Rana](https://github.com/zaid-rana)**
