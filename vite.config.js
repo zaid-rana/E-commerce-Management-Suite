@@ -15,6 +15,10 @@ export default defineConfig({
     },
   },
   plugins: [react(), tailwindcss()],
+  
+  define: {
+    __API_BASE_URL__: JSON.stringify(process.env.VITE_BASE_URL || '/api/')
+  },
 
   server: {
     proxy: {

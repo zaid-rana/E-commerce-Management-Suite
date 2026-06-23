@@ -1,7 +1,7 @@
 import axios from "axios";
 
 const apiClient = axios.create({
-    baseURL: import.meta.env.VITE_BASE_URL,
+    baseURL: import.meta.env.VITE_BASE_URL || '/api',
     withCredentials: true,
     // headers: {
     //     "Content-Type": "application/json",
@@ -9,7 +9,7 @@ const apiClient = axios.create({
 });
 
 apiClient.interceptors.request.use((config) => {
-  console.log(" Sending request to:", config.baseURL + config.url);
+  console.log("Sending request to:", config.baseURL + config.url);
   return config;
 });
 

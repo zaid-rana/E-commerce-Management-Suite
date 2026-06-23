@@ -17,7 +17,7 @@ function ProtectedRoute({ children }) {
         // );
         const res = await apiClient.post("/auth/status");
         if (!mounted) return;
-        setIsAuthed(Boolean(res?.data?.sucess || res?.data?.success));
+        setIsAuthed(Boolean(res?.data?.success));
       } catch (e) {
         if (!mounted) return;
         setIsAuthed(false);
