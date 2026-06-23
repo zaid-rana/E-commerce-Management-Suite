@@ -2,6 +2,8 @@ import { v2 as cloudinary } from 'cloudinary';
 import { CloudinaryStorage } from 'multer-storage-cloudinary';
 import dotenv from 'dotenv';
 
+const process = globalThis.process;
+
 dotenv.config();
 
 cloudinary.config({
