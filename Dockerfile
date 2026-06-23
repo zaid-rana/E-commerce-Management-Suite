@@ -3,6 +3,9 @@ FROM node:20-alpine AS builder
 
 WORKDIR /app
 
+# Accept build argument for VITE_BASE_URL
+ARG VITE_BASE_URL=/api/
+
 # Copy package files
 COPY package.json package-lock.json ./
 
@@ -12,8 +15,8 @@ RUN npm ci
 # Copy source code
 COPY . .
 
-# Build the application
-RUN npm run build
+# Build the application with VITE_BASE_URL available
+RUN VITE_BASE_URL=${VITE_BASE_URL} npm run build
 
 # Production stage - serve with nginx
 FROM nginx:alpine

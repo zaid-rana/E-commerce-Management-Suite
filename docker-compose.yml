@@ -64,6 +64,8 @@ services:
     build:
       context: .
       dockerfile: Dockerfile
+      args:
+        VITE_BASE_URL: /api/
     container_name: i-dashboard-frontend
     ports:
       - "80:80"
