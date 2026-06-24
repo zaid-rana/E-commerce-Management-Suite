@@ -16,7 +16,8 @@ RUN npm ci
 COPY . .
 
 # Build the application with VITE_BASE_URL available
-RUN VITE_BASE_URL=${VITE_BASE_URL} npm run build
+RUN NODE_OPTIONS="--max-old-space-size=2048" \
+    VITE_BASE_URL=${VITE_BASE_URL} npm run build
 
 # Production stage - serve with nginx
 FROM nginx:alpine
