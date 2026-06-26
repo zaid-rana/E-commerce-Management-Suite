@@ -25,9 +25,7 @@ services:
 
   # Backend Service
   backend:
-    build:
-      context: ./Backend
-      dockerfile: Dockerfile
+    image: zaidrana/i-dashboard-backend:latest
     container_name: i-dashboard-backend
     ports:
       - "5000:5000"
@@ -61,11 +59,7 @@ services:
 
   # Frontend Service
   frontend:
-    build:
-      context: .
-      dockerfile: Dockerfile
-      args:
-        VITE_BASE_URL: /api/
+    image: zaidrana/i-dashboard-frontend:latest
     container_name: i-dashboard-frontend
     ports:
       - "80:80"
